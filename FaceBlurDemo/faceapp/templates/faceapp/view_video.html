@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ video.original_video.name }}</title>
+  </head>
+  <body>
+    <h1>{{ video.user.name }}님의 영상</h1>
+    <video width="640" height="360" controls>
+      <source src="{{ video.processed_video.url }}" type="video/mp4" />
+      해당 브라우저는 비디오 태그를 지원하지 않습니다.
+    </video>
+  </body>
+</html>
