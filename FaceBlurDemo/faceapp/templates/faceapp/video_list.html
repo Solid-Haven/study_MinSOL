@@ -1,31 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>영상 목록</title>
-  </head>
-  <body>
-    <h1>{{ user.name }}님의 처리된 영상 목록</h1>
+{% extends "faceapp/base.html" %} {% block title %}영상 목록{% endblock title %}
+{% block content %}
+<h1>{{ user.name }}님의 처리된 영상 목록</h1>
 
-    {% if videos %}
-    <ul>
-      {% for video in videos %}
-      <li>
-        {% if video.processed_video %}
-        <a href="{{ video.processed_video.url }}" target="_blank">
-          {{ video.original_video.name }}
-        </a>
-        {% else %}
-        <span>{{ video.original_video.name }}: 처리되지 않았습니다.</span>
-        {% endif %} (업로드 시간: {{ video.uploaded_at }})
-      </li>
-      {% endfor %}
-    </ul>
+{% if videos %}
+<ul>
+  {% for video in videos %}
+  <li>
+    {% if video.processed_video %}
+    <details>
+      <summary>{{ video.original_video.name }}</summary>
+      <video width="640" height="360" controls>
+        <source src="{{ video.processed_video.url }}" type="video/mp4" />
+        브라우저에서 비디오를 지원하지 않습니다.
+      </video>
+    </details>
     {% else %}
-    <p>아직 처리된 영상이 없습니다.</p>
-    {% endif %}
+    <span>{{ video.original_video.name }}: 처리되지 않았습니다.</span>
+    {% endif %} (업로드 시간: {{ video.uploaded_at }})
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>아직 처리된 영상이 없습니다.</p>
+{% endif %}
 
-    <a href="{% url 'upload_video' user.id %}">영상 업로드하기</a>
-  </body>
-</html>
+<a href="{% url 'upload_video' user.id %}">
+  <button>영상 업로드하기</button>
+</a>
+{% endblock content %}

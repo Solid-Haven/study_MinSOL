@@ -1,24 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>영상 업로드</title>
-  </head>
-  <body>
-    <h1>영상 업로드</h1>
+{% extends "faceapp/base.html" %} {%block title %}영상 업로드{%endblock title%}
+{%block content %}
+<h1>영상 업로드</h1>
 
-    {% if message %}
-    <p style="color: green">{{ message }}</p>
-    {% endif %}
+{% if messages %}
+<ul>
+  {% for message in messages %}
+  <li>{{ message }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
 
-    <p>{{ user.name }}님, 처리할 영상을 업로드하세요.</p>
+<p>{{ user.name }}님, 모자이크할 영상을 업로드하세요.</p>
 
-    <form method="POST" enctype="multipart/form-data">
-      {% csrf_token %} {{ form.as_p }}
-      <button type="submit">업로드</button>
-    </form>
+<form method="POST" enctype="multipart/form-data">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">업로드</button>
+</form>
 
-    <a href="{% url 'video_list' user.id %}">처리된 영상 목록 보기</a>
-  </body>
-</html>
+<a href="{% url 'video_list' user.id %}">처리된 영상 목록 보기</a>
+{%endblock content%}

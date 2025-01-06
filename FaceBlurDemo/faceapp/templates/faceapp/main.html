@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>메인 페이지</title>
-  </head>
-  <body>
-    <h3>사용자 등록</h3>
-    <a href="{% url 'register_user' %}">여기를 클릭하여 사용자 등록</a>
-  </body>
-</html>
+{% extends "faceapp/base.html" %} {%block title %}메인 페이지{%endblock title %}
+{%block content %}
+<h1>메인 페이지</h1>
+<p>환영합니다! 아래 버튼을 눌러 사용자 등록을 진행하세요.</p>
+
+<a href="{% url 'register' %}">
+  <button>사용자 등록하기</button>
+</a>
+
+{% endblock content %}

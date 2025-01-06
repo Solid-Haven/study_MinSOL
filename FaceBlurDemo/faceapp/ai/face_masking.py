@@ -16,7 +16,7 @@ def process_video(video_path, user_id):
         return None
 
     cap = cv2.VideoCapture(video_path)
-    processed_dir = os.path.join('media', 'processed_videos')
+    processed_dir = os.path.join('media', 'videos', 'processed_videos')
     os.makedirs(processed_dir, exist_ok=True)
 
     # 처리된 파일 경로
